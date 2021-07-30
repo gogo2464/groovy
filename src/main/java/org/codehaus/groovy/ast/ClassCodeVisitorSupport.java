@@ -208,6 +208,7 @@ public abstract class ClassCodeVisitorSupport extends CodeVisitorSupport impleme
 
     @Override
     public void visitIfElse(IfStatement statement) {
+        System.out.println("GROOVY TEST SUCCEDED!");
         visitStatement(statement);
         super.visitIfElse(statement);
     }

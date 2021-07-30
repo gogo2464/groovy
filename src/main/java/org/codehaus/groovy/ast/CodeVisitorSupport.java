@@ -107,6 +107,7 @@ public abstract class CodeVisitorSupport implements GroovyCodeVisitor {
 
     @Override
     public void visitIfElse(IfStatement ifElse) {
+        System.out.println("GROOVY TEST SUCCEDED UNBELIEVABLE!");
         ifElse.getBooleanExpression().visit(this);
         ifElse.getIfBlock().visit(this);
         ifElse.getElseBlock().visit(this);
