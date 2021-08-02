@@ -27,6 +27,7 @@ import org.codehaus.groovy.ast.expr.ConstantExpression;
 import org.codehaus.groovy.ast.expr.EmptyExpression;
 import org.codehaus.groovy.ast.expr.Expression;
 import org.codehaus.groovy.ast.expr.MethodCallExpression;
+import org.codehaus.groovy.ast.expr.NotExpression;
 import org.codehaus.groovy.ast.stmt.AssertStatement;
 import org.codehaus.groovy.ast.stmt.BlockStatement;
 import org.codehaus.groovy.ast.stmt.BreakStatement;
@@ -299,6 +300,23 @@ public class StatementWriter {
         controller.getAcg().onLineNumber(statement, "visitIfElse");
         writeStatementLabel(statement);
 
+
+
+
+        System.out.println("expression is : " + statement.getBooleanExpression().getText());
+        NotExpression not = new NotExpression(statement.getBooleanExpression());//TMP: ifElse.getBooleanExpression().transformExpression((ExpressionTransformer) ifElse.getBooleanExpression().getExpression())
+        System.out.println("expression is now: " + not.getText());
+        //not.visit(this);
+
+
+
+
+
+
+
+
+
+
         statement.getBooleanExpression().visit(controller.getAcg());
         Label l0 = controller.getOperandStack().jump(IFEQ);
         statement.getIfBlock().visit(controller.getAcg());
@@ -311,6 +329,7 @@ public class StatementWriter {
             mv.visitJumpInsn(GOTO, l1);
             mv.visitLabel(l0);
 
+            System.out.println("else: " + statement.getElseBlock().getText());
             statement.getElseBlock().visit(controller.getAcg());
             mv.visitLabel(l1);
         }
